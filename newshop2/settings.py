@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'authapp',
     'basketapp',
     'adminapp',
-    'social_django'
+    'social_django',
+    'ordersapp'
 ]
 
 MIDDLEWARE = [
@@ -135,6 +136,7 @@ AUTHENTICATION_BACKENDS = (
 )
 
 SOCIAL_AUTH_URL_NAMESPACE = 'social'
+SOCIAL_AUTH_VK_OAUTH2_VERSION = "5.131"
 
 # Загружаем секреты из файла
 with open('newshop2/vk.json', 'r') as f:
