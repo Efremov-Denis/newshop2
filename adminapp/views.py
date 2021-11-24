@@ -5,7 +5,7 @@ from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
 from adminapp.forms import ShopUserAdminEditForm, ProductEditForm
 from django.contrib.auth.decorators import user_passes_test
-from django.views.generic import ListView, CreateView, UpdateView, DetailView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView, DeleteView
 
 
 class UsersListView(ListView):
@@ -25,22 +25,8 @@ class UserUpdate(UpdateView):
     fields = []
 
 
-def user_delete(request, pk):
-    title = 'пользователи/удаление'
-    
-    user = get_object_or_404(ShopUser, pk=pk)
-    
-    if request.method == 'POST':
-        #user.delete()
-        #вместо удаления лучше сделаем неактивным
-        user.is_active = False
-        user.save()
-        return HttpResponseRedirect(reverse('admin:users'))
-
-    context = {'title': title, 'user_to_delete': user}
-    
-    return render(request, 'adminapp/user_delete.html', context)
-
+class UserDelete(DeleteView):
+    model = ShopUser
 
 
 def categories(request):
